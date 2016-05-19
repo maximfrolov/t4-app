@@ -1,0 +1,14 @@
+{% extends 'Index.html' %}
+
+{% block content %}
+<div class="container">
+    <div style="width: 50%; margin: 0 auto;">
+        <h1>Привет, мир!</h1>
+        <h2>Это {{ projectName | lower }}.</h2>
+        <h3>Новость дня!</h3>
+    </div>
+    <div style="width: 50%; height: 100%; margin: 0 auto; border: 1px solid blue">
+        <t4:block path="//News/Last" />
+    </div>
+</div>
+{% endblock %}

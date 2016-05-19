@@ -1,0 +1,20 @@
+{% extends 'Admin.html' %}
+{% block title %}Список категорий | {{ parent() }}{% endblock title %}
+{% block content %}
+<div class="container">
+    <h1>Список категорий</h1>
+    <ul style="list-style-type: none;">
+    {% for cat in cats %}
+        {% if cat.__lvl == 0 %}
+        <li>
+            <a href="#"><h3>{{ cat.title }}</h3></a>
+        </li>
+        {% elseif cat.__lvl == 1 %}
+        <li>
+            <a href="#"><h4>{{ cat.title }}</h4></a>
+        </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'Admin.html' %}
+{% block title %}Таблица новостей | {{ parent() }}{% endblock title %}
+{% block content %}
+<div class="container">
+    <h1>Таблица новостей</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID Новости</th>
+            <th>Заголовок</th>
+            <th>Дата публикации</th>
+            <th>
+                <a href="/admin/news/edit.html" class="btn btn-sm btn-success pull-right">
+                    Добавить новость
+                </a>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.pk }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.date  | date('d.m.Y') }}</td>
+            <td>
+                <div class="pull-right">
+                    <a href="/admin/news/edit.html?id={{ item.pk }}" class="btn btn-sm btn-primary">
+                        Редактировать
+                    </a>
+                    <a href="/admin/news/delete.html?id={{ item.pk }}" class="btn btn-sm btn-danger">
+                        Удалить
+                    </a>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Админ-панель{% endblock %}</title>
+    {{ publishCss() }}
+</head>
+<body>
+{% block content %}{% endblock %}
+{{ publishJs() }}
+</body>
+</html>

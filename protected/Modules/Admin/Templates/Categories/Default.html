@@ -3,17 +3,30 @@
 {% block content %}
 <div class="container">
     <h1>Список категорий</h1>
-    <ul style="list-style-type: none;">
+    <div class="clearfix" style="margin-bottom: 20px">
+        <a href="/admin/categories/add.html" class="btn btn-sm btn-success pull-right">
+            Добавить категорию
+        </a>
+    </div>
+    <ul  class="list-group">
     {% for cat in cats %}
-        {% if cat.__lvl == 0 %}
-        <li>
-            <a href="#"><h3>{{ cat.title }}</h3></a>
+        <li class="list-group-item">
+            {% if cat.__lvl == 0 %}
+            <span style="font-weight: bold">{{ cat.title }}</span>
+            {% elseif cat.__lvl == 1 %}
+            <span style="margin-left: 20px">{{ cat.title }}</span>
+            {% elseif cat.__lvl == 2 %}
+            <span style="margin-left: 40px; font-weight: lighter">{{ cat.title }}</span>
+            {% endif %}
+            <div class="pull-right">
+                <a href="/admin/categories/edit.html?id={{ cat.pk }}" class="btn btn-xs btn-primary">
+                    Редактировать
+                </a>
+                <a href="/admin/categories/delete.html?id={{ cat.pk }}" class="btn btn-xs btn-danger">
+                    Удалить
+                </a>
+            </div>
         </li>
-        {% elseif cat.__lvl == 1 %}
-        <li>
-            <a href="#"><h4>{{ cat.title }}</h4></a>
-        </li>
-        {% endif %}
     {% endfor %}
     </ul>
 </div>

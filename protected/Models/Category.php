@@ -18,6 +18,9 @@ class Category
         'columns' => [
             'title' => ['type' => 'string'],
         ],
+        'relations' => [
+            'products' => ['type' => self::HAS_MANY, 'model' => Product::class],
+        ],
     ];
 
     static protected $extensions = ['tree'];

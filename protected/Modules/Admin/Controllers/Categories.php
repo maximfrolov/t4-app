@@ -35,9 +35,10 @@ class Categories
 
     public function actionUpdate()
     {
-        if (!empty($this->app->request->post->id)) {
-            $cat = Category::findByPK($this->app->request->post->id);
-            $cat->fill($this->app->request->post);
+        $post = $this->app->request->post;
+        if (!empty($post->id)) {
+            $cat = Category::findByPK($post->id);
+            $cat->fill($post);
             $cat->save();
         }
         $this->redirect('/admin/categories');

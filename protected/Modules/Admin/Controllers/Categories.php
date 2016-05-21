@@ -52,9 +52,9 @@ class Categories
     public function actionSave($cat)
     {
         if (!empty($cat->title)) {
-            $catNew = new Category();
-            $catNew->fill($cat);
-            $catNew->save();
+            $newCat = new Category();
+            $newCat->fill($cat);
+            $newCat->save();
         }
         $this->redirect('/admin/categories');
     }

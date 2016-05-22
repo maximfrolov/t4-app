@@ -1,0 +1,20 @@
+{% extends 'Index.html' %}
+{% block title %}{{ cat.title }} | {{ parent() }}{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Категория: {{ cat.title }}</h1>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="thumbnail">
+                <div class="caption">
+                    <img src="" alt="" class="img-responsive">
+                    <p>{{ product.title }}</p>
+                    <p>Цена: {{ product.price }} р.</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -17,7 +17,6 @@ class Categories
     {
         if (!empty(Category::findByPK($id))) {
             $this->data->cat = Category::findByPK($id);
-            $this->data->products = $this->data->cat->products;
         } else {
             $this->redirect('/categories');
         }

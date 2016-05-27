@@ -28,7 +28,7 @@ class Category
 
     protected function validateTitle($val)
     {
-        if (strlen($val) <= 3) {
+        if (strlen($val) < 3) {
             yield new Exception('Too short a name!');
         }
         if (!preg_match('~[а-яa-z]~i', $val)) {

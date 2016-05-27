@@ -2,6 +2,7 @@
 
 namespace App\Modules\Admin\Controllers;
 
+use T4\Core\MultiException;
 use T4\Mvc\Controller;
 use App\Models\Category;
 
@@ -44,19 +45,23 @@ class Categories
         $this->redirect('/admin/categories');
     }
 
-    public function actionAdd()
+    /**
+     * @param null $cat
+     */
+    public function actionAdd($cat = null)
     {
-        $this->data->cats = Category::findAllTree();
-    }
-
-    public function actionSave($cat)
-    {
-        if (!empty($cat->title)) {
-            $newCat = new Category();
-            $newCat->fill($cat);
-            $newCat->save();
+        if (!empty($cat)) {
+            try {
+                $newCat = new Category();
+                $newCat->fill($cat);
+                $newCat->save();
+                $this->redirect('/admin/categories');
+            } catch (MultiException $errors) {
+                $this->data->errors = $errors;
+                $this->data->cat = $cat;
+            }
         }
-        $this->redirect('/admin/categories');
+        $this->data->cats = Category::findAllTree();
     }
 
     /**

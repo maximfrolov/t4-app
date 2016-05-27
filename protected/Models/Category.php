@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use T4\Core\Exception;
 use T4\Orm\Model;
 
 /**
@@ -25,4 +26,19 @@ class Category
 
     static protected $extensions = ['tree'];
 
+    protected function validateTitle($val)
+    {
+        if (strlen($val) <= 3) {
+            yield new Exception('Too short a name!');
+        }
+        if (!preg_match('~[а-яa-z]~i', $val)) {
+            yield new Exception('The letters must be in the title category!');
+        }
+        return true;
+    }
+
+    protected function sanitizeTitle($val)
+    {
+        return trim($val);
+    }
 }

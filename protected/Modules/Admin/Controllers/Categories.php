@@ -30,6 +30,8 @@ class Categories
             if (empty($this->data->cat)) {
                 $this->redirect('/admin/categories');
             }
+        } else {
+            $this->redirect('/admin/categories');
         }
         if (!empty($cat)) {
             try {

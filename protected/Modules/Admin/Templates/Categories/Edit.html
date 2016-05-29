@@ -10,7 +10,7 @@
         {{ error.message }}
     </div>
     {% endfor %}
-    <form class="form-horizontal" method="post" action="/admin/categories/edit.html">
+    <form class="form-horizontal" method="post" action="/admin/categories/edit.html?id={{ cat.pk }}">
         <input type="hidden" id="id" name="cat[pk]" value="{{ cat.pk }}">
         <div class="form-group">
             <label for="title" class="col-sm-2 control-label">Категория</label>

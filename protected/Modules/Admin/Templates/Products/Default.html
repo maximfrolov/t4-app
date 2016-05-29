@@ -1,0 +1,39 @@
+{% extends 'Admin.html' %}
+{% block title %}Список товаров | {{ parent() }}{% endblock title %}
+{% block content %}
+<div class="container">
+    <h1>Список товаров</h1>
+    <a href="/admin/products/add.html" class="btn btn-sm btn-success pull-right">
+        Добавить товар
+    </a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Товар</th>
+                <th>Цена</th>
+                <th>Категория товара</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.title }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.category.title }}</td>
+                <td>
+                    <div class="pull-right">
+                        <a href="/admin/products/edit.html?id={{ product.pk }}" class="btn btn-xs btn-primary">
+                            Редактировать
+                        </a>
+                        <a href="/admin/products/delete.html?id={{ product.pk }}" class="btn btn-xs btn-danger">
+                            Удалить
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

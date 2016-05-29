@@ -5,12 +5,17 @@
     <div style="width: 65%; margin: 0 auto;">
         <h1>Форма редактирования категории</h1>
     </div>
-    <form class="form-horizontal" method="post" action="/admin/categories/update.html">
-        <input type="hidden" id="id" name="id" value="{{ cat.pk }}">
+    {% for error in errors %}
+    <div class="alert alert-danger col-sm-10 col-sm-offset-2">
+        {{ error.message }}
+    </div>
+    {% endfor %}
+    <form class="form-horizontal" method="post" action="/admin/categories/edit.html">
+        <input type="hidden" id="id" name="cat[pk]" value="{{ cat.pk }}">
         <div class="form-group">
             <label for="title" class="col-sm-2 control-label">Категория</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="title" name="title" value="{{ cat.title }}">
+                <input type="text" class="form-control" id="title" name="cat[title]" value="{{ cat.title }}">
             </div>
         </div>
         <div class="form-group">

@@ -21,28 +21,27 @@ class Categories
 
     /**
      * @param null $id
+     * @param null $cat
      */
-    public function actionEdit($id = null)
+    public function actionEdit($id = null, $cat = null)
     {
         if (null !== $id) {
             $this->data->cat = Category::findByPK($id);
             if (empty($this->data->cat)) {
                 $this->redirect('/admin/categories');
             }
-        } else {
-            $this->redirect('/admin/categories');
         }
-    }
-
-    public function actionUpdate()
-    {
-        $post = $this->app->request->post;
-        if (!empty($post->id)) {
-            $cat = Category::findByPK($post->id);
-            $cat->fill($post);
-            $cat->save();
+        if (!empty($cat)) {
+            try {
+                $updatedCat = Category::findByPK($cat['pk']);
+                $updatedCat->fill($cat);
+                $updatedCat->save();
+                $this->redirect('/admin/categories');
+            } catch (MultiException $errors) {
+                $this->data->errors = $errors;
+                $this->data->cat = $cat;
+            }
         }
-        $this->redirect('/admin/categories');
     }
 
     /**

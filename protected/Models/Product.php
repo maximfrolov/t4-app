@@ -62,12 +62,12 @@ class Product
 
     protected function validatePrice($val)
     {
-        if (!preg_match('~\d+~', $val)) {
+        if (!preg_match('~\d~', $val)) {
             yield new Exception('Only numbers are allowed');
         }
 
-        if ($val < 0) {
-            yield new Exception('The price cannot be less than zero!');
+        if ($val <= 0) {
+            yield new Exception('The price cannot be less than or equal to zero!');
         }
     }
 

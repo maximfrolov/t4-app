@@ -39,6 +39,34 @@ class Products
     }
 
     /**
+     * @param null $id
+     * @param null $product
+     */
+    public function actionEdit($id = null, $product = null)
+    {
+        if (null !== $id) {
+            $this->data->product = Product::findByPK($id);
+            if (empty($this->data->product)) {
+                $this->redirect('/admin/products');
+            }
+        } else {
+            $this->redirect('/admin/products');
+        }
+        if (!empty($product)) {
+            try {
+                $updatedProduct = Product::findByPK($product['pk']);
+                $updatedProduct->fill($product);
+                $updatedProduct->save();
+                $this->redirect('/admin/products');
+            } catch (MultiException $errors) {
+                $this->data->errors = $errors;
+                $this->data->product = $product;
+            }
+        }
+        $this->data->cats = Category::findAllTree();
+    }
+
+    /**
      * @param int $id
      */
     public function actionDelete(int $id)

@@ -1,0 +1,55 @@
+{% extends 'Admin.html' %}
+{% block title %}Форма редактирования товара | {{ parent() }}{% endblock title %}
+{% block content %}
+<div class="container">
+    <div style="width: 65%; margin: 0 auto;">
+        <h1>Форма редактирования товара</h1>
+    </div>
+    {% for error in errors %}
+    <div class="alert alert-danger col-sm-10 col-sm-offset-2">
+        {{ error.message }}
+    </div>
+    {% endfor %}
+    <form class="form-horizontal" method="post" action="/admin/products/edit.html?id={{ product.pk }}">
+        <input type="hidden" id="id" name="product[pk]" value="{{ product.pk }}">
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">Название товара</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="title" name="product[title]" value="{{ product.title }}" placeholder="Введите название товара">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description" class="col-sm-2 control-label">Описание товара</label>
+            <div class="col-sm-10">
+                <textarea type="text" class="form-control" id="description" name="product[description]" rows="10" placeholder="Введите описание товара">{{ product.description }}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="price" class="col-sm-2 control-label">Цена товара</label>
+            <div class="col-sm-10">
+                <input type="number" step="0.01" class="form-control" id="price" name="product[price]" value="{{ product.price }}" placeholder="Введите цену товара">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="cats" class="col-sm-2 control-label">Категория товара</label>
+            <div class="col-sm-10">
+                <select id="cats" name="product[__category_id]">
+                    {% for cat in cats %}
+                        {% if product.__category_id == cat.pk %}
+                        <option value="{{ cat.pk }}" selected>{{ cat.title }}</option>
+                        {% else %}
+                        <option value="{{ cat.pk }}">{{ cat.title }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success">Сохранить</button>
+                <a href="/admin/products.html" class="btn btn-default">Отменить</a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
